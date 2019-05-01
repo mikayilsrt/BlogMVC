@@ -1,6 +1,7 @@
 <?php
 
 use App\config\database;
+use App\Controllers\IndexController;
 use Slim\App as Router;
 
 require "../vendor/autoload.php";
@@ -16,7 +17,8 @@ $database->getPDO();
 $app = new Router();
 
 $app->get('/', function ($request, $response, $args) {
-    echo "Hello World";
+    $IndexController = new IndexController();
+    $IndexController->index();
 });
 
 $app->run();
