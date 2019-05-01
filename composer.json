@@ -6,7 +6,9 @@
             "email": "sert.mikayil@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "slim/slim": "^3.12"
+    },
     "autoload": {
         "psr-4": {
             "App\\": "app/"
