@@ -2,6 +2,8 @@
 
 use App\config\database;
 use App\Controllers\IndexController;
+use App\Controllers\LoginController;
+use App\Controllers\RegisterController;
 use Slim\App as Router;
 
 require "../vendor/autoload.php";
@@ -19,6 +21,26 @@ $app = new Router();
 $app->get('/', function ($request, $response, $args) {
     $IndexController = new IndexController();
     $IndexController->index();
+});
+
+$app->get('/login', function ($request, $response, $args) {
+    $LoginController = new LoginController();
+    $LoginController->index();
+});
+
+$app->post('/login', function ($request, $response, $args) {
+    $LoginController = new LoginController();
+    $LoginController->store($request);
+});
+
+$app->get('/register', function ($request, $response, $args) {
+    $RegisterController = new RegisterController();
+    $RegisterController->index();
+});
+
+$app->post('/register', function ($request, $response, $args) {
+    $RegisterController = new RegisterController();
+    $RegisterController->store($request);
 });
 
 $app->run();
