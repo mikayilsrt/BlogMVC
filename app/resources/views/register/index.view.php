@@ -10,7 +10,7 @@
 
 <div class="uk-container uk-container-small">
     <h3>S'inscrire</h3>
-    <form method="post" action="/login">
+    <form method="post" action="/register">
         <div class="uk-margin">
             <input class="uk-input uk-form-width-auto" name="name" type="text" placeholder="Nom d'utilisateur" required>
         </div>

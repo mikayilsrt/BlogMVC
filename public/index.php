@@ -13,8 +13,7 @@ define("DB_NAME", "blog-mvc");
 define("DB_USER", "root");
 define("DB_PASSWORD", "");
 
-$database = new database(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD);
-$database->getPDO();
+$db = new database(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD);
 
 $app = new Router();
 
@@ -40,7 +39,7 @@ $app->get('/register', function ($request, $response, $args) {
 
 $app->post('/register', function ($request, $response, $args) {
     $RegisterController = new RegisterController();
-    $RegisterController->store($request);
+    $RegisterController->store($request, $response);
 });
 
 $app->run();
