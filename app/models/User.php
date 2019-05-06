@@ -37,4 +37,24 @@ class User {
         return $result;
     }
 
+    public function find_by_email_password($email, $password) {
+        global $db;
+        $result = array();
+
+        try {
+            $req = $db->getPDO()
+                ->query("SELECT * FROM users WHERE email = '" . $email . "' && password = '" . $password . "'")
+                ->fetchAll(PDO::FETCH_OBJ);
+            
+            if ($req) {
+                $result = $req;
+            }
+
+        } catch (\Exception $ex) {
+            die('Errors: ' . $ex->getMessage());
+        }
+
+        return $result;
+    }
+
 }

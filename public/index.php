@@ -29,7 +29,7 @@ $app->get('/login', function ($request, $response, $args) {
 
 $app->post('/login', function ($request, $response, $args) {
     $LoginController = new LoginController();
-    $LoginController->store($request);
+    $LoginController->searchUser($request, $response);
 });
 
 $app->get('/register', function ($request, $response, $args) {
