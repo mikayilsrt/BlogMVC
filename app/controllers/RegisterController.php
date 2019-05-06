@@ -5,22 +5,38 @@ namespace App\Controllers;
 use App\Models\User;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Slim\Flash\Messages;
 
 /**
  * Class RegisterController
  * @package App\Controllers
  */
 class RegisterController extends Controller {
+    
+    /**
+     * Instance of message object.
+     * 
+     * @var Message
+     */
+    private $messages;
+    
+    /**
+     * Constructor of register controller.
+     */
+    public function __construct() {
+        $this->messages = new Messages();
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function index () {
-        Controller::view("register/index.view");
+        require Controller::view("register/index.view");
     }
 
     /**
      * Store a newly created resource in storage.
+     *
      * @param Request $request
      * @param Response $response
      */
@@ -34,16 +50,49 @@ class RegisterController extends Controller {
 
         if (!empty($name) && !empty($email) && !empty($password) && $passwordConfirm) {
             if ($password === $passwordConfirm) {
+                // instance a new user model.
                 $user = new User();
+
+                // add new user and return true or false.
                 $result = $user->create(
                     array($name, $email, $password)
                 );
-
-                $result ? $response->withRedirect("/login", 202) : die("Error");
+                // if user is created redirect in login page.
+                if ($result) { 
+                    header('Location: /login');
+                    die();
+                } else {
+                    $this->addFlashMessage("errors", "Utilisateur existant :(");
+                }
+            } else {
+                $this->addFlashMessage("errors", "Mot de passe non confirmer.");
             }
+        } else {
+            $this->addFlashMessage("errors", "Tous les champs doivent étre complèter.");
         }
 
-        // return $response->withRedirect("login", 202);
+        $messages = $this->getMessages();
+
+        require Controller::view("register/index.view");
+    }
+    
+    /**
+     * Add a new form message.
+     * 
+     * @param string $key (errors, success, etc..)
+     * @param string $value
+     */
+    private function addFlashMessage ($key, $value) {
+        $this->messages->addMessageNow($key, $value);
+    }
+
+    /**
+     * Return all form message.
+     * 
+     * @return array
+     */
+    private function getMessages () {
+        return $this->messages->getMessages();
     }
 
 }

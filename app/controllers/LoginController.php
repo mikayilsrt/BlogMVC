@@ -14,7 +14,7 @@ class LoginController extends Controller {
      * Show the application login page.
      */
     public function index () {
-        Controller::view("login/index.view");
+        require Controller::view("login/index.view");
     }
 
     public function store (Request $request) {

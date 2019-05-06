@@ -12,7 +12,7 @@ class IndexController extends Controller {
      * Show the application home page.
      */
     public function index () {
-        Controller::view("home/index.view");
+        require Controller::view("home/index.view");
     }
 
 }

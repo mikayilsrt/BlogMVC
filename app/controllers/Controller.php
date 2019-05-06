@@ -13,7 +13,7 @@ class Controller {
      * @param String $path
      */
     static function view ($path) {
-        require __DIR__ . "/../resources/views/" . $path . ".php";
+        return __DIR__ . "/../resources/views/" . $path . ".php";
     }
 
 }
