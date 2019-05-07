@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\User;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Slim\Flash\Messages;
 
 /**
  * Class LoginController
@@ -12,26 +13,40 @@ use Slim\Http\Response;
  */
 class LoginController extends Controller {
 
+    /**
+     * Instance of message object.
+     * 
+     * @var Message
+     */
+    private $messages;
+
+    /**
+     * Constructor of LoginController.
+     */
     public function __construct () {
-        if (!$_SESSION) {
+        if (!isset($_SESSION)) {
             \session_start();
         }
+        $this->messages = new Messages();
     }
 
     /**
      * Show the application login page.
      */
     public function index () {
+        if (isset($_SESSION['user'])) {
+            header('Location: /');
+            die();
+        }
         require Controller::view("login/index.view");
     }
 
-    public function store (Request $request) {
-        $formRequest = $request->getParsedBody();
-        echo "<pre>";
-        var_dump($formRequest);
-        echo "</pre>";
-    }
-
+    /**
+     * Search user after form posted.
+     * 
+     * @param $request
+     * @param $response
+     */
     public function searchUser (Request $request, Response $response) {
         $formRequest = $request->getParsedBody();
 
@@ -43,19 +58,41 @@ class LoginController extends Controller {
 
             $user_request = $user->find_by_email_password($email, $password);
 
-            echo "<pre>";
-            var_dump($user_request);
-            echo "</pre>";
+            if ($user_request) {
+                $this->createSession($user_request);
+
+                header('Location: /');
+                die();
+            } else {
+                die("tab vide");
+            }
         }
     }
 
-    public function createSession () {
+    /**
+     * create a new session if not existe.
+     * 
+     * @param array $userInformation
+     */
+    public function createSession ($userInformation) {
         $_SESSION['user'] = array(
-            "name"  =>  $name,
-            "email" =>  $email,
-            "created_at"    =>  $created_at,
-            "updated_at"    =>  $updated_at
+            "name"  =>  $userInformation[0]->name,
+            "email" =>  $$userInformation[0]->email,
+            "created_at"    =>  $userInformation[0]->created_at,
+            "updated_at"    =>  $userInformation[0]->updated_at
         );
+    }
+
+    /**
+     * destroy the user session.
+     */
+    public function destroySession () {
+        if ($_SESSION['user']) {
+            unset($_SESSION['user']);
+        }
+
+        header('Location: /');
+        die();
     }
 
 }

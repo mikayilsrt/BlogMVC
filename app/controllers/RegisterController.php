@@ -24,6 +24,13 @@ class RegisterController extends Controller {
      * Constructor of register controller.
      */
     public function __construct() {
+        if (!isset($_SESSION)) {
+            \session_start();
+        }
+        if (isset($_SESSION['user'])) {
+            header('Location: /');
+            die();
+        }
         $this->messages = new Messages();
     }
 

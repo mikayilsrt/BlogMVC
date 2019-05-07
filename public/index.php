@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 use App\config\database;
 use App\Controllers\IndexController;
 use App\Controllers\LoginController;
@@ -18,6 +20,7 @@ $db = new database(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD);
 $app = new Router();
 
 $app->get('/', function ($request, $response, $args) {
+    var_dump($_SESSION);
     $IndexController = new IndexController();
     $IndexController->index();
 });
@@ -40,6 +43,11 @@ $app->get('/register', function ($request, $response, $args) {
 $app->post('/register', function ($request, $response, $args) {
     $RegisterController = new RegisterController();
     $RegisterController->store($request, $response);
+});
+
+$app->post('/logout', function ($request, $response, $args) {
+    $LoginController = new LoginController();
+    $LoginController->destroySession();
 });
 
 $app->run();

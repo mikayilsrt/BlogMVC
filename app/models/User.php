@@ -43,11 +43,11 @@ class User {
 
         try {
             $req = $db->getPDO()
-                ->query("SELECT * FROM users WHERE email = '" . $email . "' && password = '" . $password . "'")
-                ->fetchAll(PDO::FETCH_OBJ);
+                ->query("SELECT * FROM users WHERE email = '" . $email . "' && password = '" . $password . "'");
+            $data = $req->fetchAll(PDO::FETCH_OBJ);
             
-            if ($req) {
-                $result = $req;
+            if ($data) {
+                $result = $data;
             }
 
         } catch (\Exception $ex) {
