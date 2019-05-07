@@ -20,7 +20,6 @@ $db = new database(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD);
 $app = new Router();
 
 $app->get('/', function ($request, $response, $args) {
-    var_dump($_SESSION);
     $IndexController = new IndexController();
     $IndexController->index();
 });
