@@ -64,9 +64,34 @@ class LoginController extends Controller {
                 header('Location: /');
                 die();
             } else {
-                die("tab vide");
+                $this->addFlashMessage("errors", "Identifiant ou mot de passe incorrect.");
             }
+        } else {
+            $this->addFlashMessage("errors", "Tous les champs doivent être remplis.");
         }
+
+        $messages = $this->getMessages();
+
+        require Controller::view("login/index.view");
+    }
+
+    /**
+     * Add a new form message.
+     * 
+     * @param string $key (errors, success, etc..)
+     * @param string $value
+     */
+    private function addFlashMessage ($key, $value) {
+        $this->messages->addMessageNow($key, $value);
+    }
+
+    /**
+     * Return all form message.
+     * 
+     * @return array
+     */
+    private function getMessages () {
+        return $this->messages->getMessages();
     }
 
     /**

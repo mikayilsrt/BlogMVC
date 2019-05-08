@@ -75,7 +75,7 @@ class RegisterController extends Controller {
                 $this->addFlashMessage("errors", "Mot de passe non confirmer.");
             }
         } else {
-            $this->addFlashMessage("errors", "Tous les champs doivent étre complèter.");
+            $this->addFlashMessage("errors", "Tous les champs doivent être remplis.");
         }
 
         $messages = $this->getMessages();

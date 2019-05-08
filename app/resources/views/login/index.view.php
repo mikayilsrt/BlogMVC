@@ -9,6 +9,13 @@
 </div>
 
 <div class="uk-container uk-container-small">
+    <?php if (!empty($messages)): foreach ($messages['errors'] as $message): ?>
+        <div class="uk-alert-danger" uk-alert>
+            <a class="uk-alert-close" uk-close></a>
+            <p><?= $message ?></p>
+        </div>
+    <?php endforeach; endif; ?>
+
     <h3>Se connecter</h3>
     <form method="post" action="/login">
         <div class="uk-margin">
