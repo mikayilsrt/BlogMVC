@@ -2,11 +2,12 @@
 
 session_start();
 
+use Slim\App as Router;
 use App\config\database;
 use App\Controllers\IndexController;
 use App\Controllers\LoginController;
+use App\Controllers\ArticlesController;
 use App\Controllers\RegisterController;
-use Slim\App as Router;
 
 require "../vendor/autoload.php";
 
@@ -22,6 +23,16 @@ $app = new Router();
 $app->get('/', function ($request, $response, $args) {
     $IndexController = new IndexController();
     $IndexController->index();
+});
+
+$app->get('/articles', function ($request, $response, $args) {
+    $ArticlesController = new ArticlesController();
+    $ArticlesController->index();
+});
+
+$app->get('/articles/{id}', function ($request, $response, $args) {
+    $ArticlesController = new ArticlesController();
+    $ArticlesController->show($request, $response, $args);
 });
 
 $app->get('/login', function ($request, $response, $args) {
