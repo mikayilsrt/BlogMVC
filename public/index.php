@@ -2,6 +2,7 @@
 
 session_start();
 
+use Dotenv\Dotenv;
 use Slim\App as Router;
 use App\config\database;
 use App\Controllers\IndexController;
@@ -12,10 +13,13 @@ use App\Controllers\RegisterController;
 
 require "../vendor/autoload.php";
 
-define("DB_HOST", "localhost");
-define("DB_NAME", "blog-mvc");
-define("DB_USER", "root");
-define("DB_PASSWORD", "");
+$dotenv = Dotenv::create(__DIR__ . "/..");
+$dotenv->load();
+
+define("DB_HOST", $_ENV['DB_HOST']);
+define("DB_NAME", $_ENV['DB_NAME']);
+define("DB_USER", $_ENV['DB_USER']);
+define("DB_PASSWORD", $_ENV['DB_PASSWORD']);
 
 $db = new database(DB_HOST, DB_NAME, DB_USER, DB_PASSWORD);
 
