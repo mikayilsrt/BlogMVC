@@ -22,6 +22,17 @@ class Article {
         return $posts;
     }
 
+    public function getArticlesLimited ($size = 3) {
+        global $db;
+        
+        try {
+            return $db->getPDO()->query("SELECT articles.*, users.name FROM articles JOIN users ON articles.user_id = users.id LIMIT 0, " . $size)
+                ->fetchAll();
+        } catch (Exception $ex) {
+            die('Errors: ' . $ex->getMessage());
+        }
+    }
+
     public function find_by_id ($id) {
         global $db;
 
