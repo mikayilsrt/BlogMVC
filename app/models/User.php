@@ -57,4 +57,16 @@ class User {
         return $result;
     }
 
+    public function getUserById($user_id)
+    {
+        global $db;
+        try {
+            return $db->getPDO()
+                ->query("SELECT * FROM users WHERE id = " . $user_id)
+                ->fetch();
+        } catch (Exeption $ex) {
+            die('Errors: ' . $ex->getMessage());
+        }
+    }
+
 }

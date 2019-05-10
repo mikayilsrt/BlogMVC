@@ -6,6 +6,7 @@ use Slim\App as Router;
 use App\config\database;
 use App\Controllers\IndexController;
 use App\Controllers\LoginController;
+use App\Controllers\ProfileController;
 use App\Controllers\ArticlesController;
 use App\Controllers\RegisterController;
 
@@ -33,6 +34,11 @@ $app->get('/articles', function ($request, $response, $args) {
 $app->get('/articles/{id}', function ($request, $response, $args) {
     $ArticlesController = new ArticlesController();
     $ArticlesController->show($request, $response, $args);
+});
+
+$app->get('/profile/{id}', function ($request, $response, $args) {
+    $ProfileController = new ProfileController();
+    $ProfileController->index($request, $response, $args);
 });
 
 $app->get('/login', function ($request, $response, $args) {
