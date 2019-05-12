@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\User;
 use Slim\Http\Request;
+use App\Models\Article;
 use Slim\Http\Response;
 
 /**
@@ -17,7 +18,10 @@ class ProfileController extends Controller {
      */
     public function index (Request $request, Response $response, $arg) {
         $userModel = new User();
+        $articleModel = new Article();
+
         $user = $userModel->getUserById($arg['id']);
+        $articles = $articleModel->getArticlesByUserId($arg['id']);
 
         if ($user === false) {
             die("User is not exist.");

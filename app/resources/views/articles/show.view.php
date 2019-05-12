@@ -6,7 +6,7 @@
 
         <h1 class="uk-article-title"><?= $article[0]['title']; ?></h1>
 
-        <p class="uk-article-meta">Written by <a href="#"><?= $article[0]['name']; ?></a> on <?= $article[0]['created_at']; ?>.</p>
+        <p class="uk-article-meta">Written by <a href="/profile/<?= $article[0]['userID']; ?>"><strong><?= $article[0]['name']; ?></strong></a> on <?= $article[0]['created_at']; ?>.</p>
 
         <p class="uk-text-lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
 
