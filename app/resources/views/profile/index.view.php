@@ -12,8 +12,8 @@
 <div class="uk-container uk-container-small">
     <div class="uk-text-center" uk-grid>
         <div class="uk-width-1-3@m">
-            <div class="uk-card uk-card-body">
-                <div class="avatar">
+            <div class="uk-card uk-card-body profile-card">
+                <div class="profile-avatar">
                     <img src="https://images.unsplash.com/photo-1557389767-53dbcb02fc98?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" />
                 </div>
                 <h3><?= $user['name']; ?></h3>
@@ -35,6 +35,7 @@
                             </div>
                         </div>
                     </div>
+                    <br />
                 <?php endforeach; ?>
             </div>
         </div>

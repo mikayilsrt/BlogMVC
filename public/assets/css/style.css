@@ -1,0 +1,19 @@
+.profile-card p {
+    margin: 0;
+}
+.profile-card h3 {
+    margin: 8px 0px;
+}
+
+.profile-avatar {
+
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 50%;
+    display: -webkit-inline-box;
+}
+
+.profile-avatar img {
+    width: 100%;
+}

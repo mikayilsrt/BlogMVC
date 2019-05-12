@@ -6,6 +6,7 @@
 
         <!-- UIkit CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.4/css/uikit.min.css" />
+        <link rel="stylesheet" type="text/css" href="http://<?= $_SERVER['HTTP_HOST'] ?>/assets/css/style.css" />
     </head>
     <body>
     <header>
@@ -31,7 +32,7 @@
                             <div class="uk-navbar-dropdown">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
                                     <li class="uk-nav-header">Mon compte</li>
-                                    <li><a href="#">Voir le profile</a></li>
+                                    <li><a href="/profile/<?= $_SESSION['user']['id']; ?>">Voir le profile</a></li>
                                     <li><a href="#">Paramètres</a></li>
                                     <li class="uk-nav-divider"></li>
                                     <form method="post" action="/logout">
