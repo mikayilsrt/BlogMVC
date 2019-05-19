@@ -16,7 +16,7 @@
                 <a class="uk-navbar-item uk-logo" href="#">BLOG MVC</a>
                 <!-- nav link -->
                 <ul class="uk-navbar-nav">
-                    <li class="uk-active"><a href="/">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="/articles">Blog</a></li>
                 </ul>
             </div>
