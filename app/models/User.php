@@ -69,4 +69,40 @@ class User {
         }
     }
 
+    public function setName ($name, $user_id)
+    {
+        global $db;
+
+        try {
+            return $db->getPDO()
+                ->query("UPDATE users SET users.name = '" . $name . "' WHERE users.id = " . $user_id);
+        } catch (Exeption $ex) {
+            die('Errors: ' . $ex->getMessage());
+        }
+    }
+
+    public function setEmail ($email, $user_id)
+    {
+        global $db;
+
+        try {
+            return $db->getPDO()
+                ->query("UPDATE users SET users.email = '" . $email . "' WHERE users.id = " . $user_id);
+        } catch (Exeption $ex) {
+            die('Errors: ' . $ex->getMessage());
+        }
+    }
+
+    public function setPassword ($password, $user_id)
+    {
+        global $db;
+
+        try {
+            return $db->getPDO()
+                ->query("UPDATE users SET users.password = '" . $password . "' WHERE users.id = " . $user_id);
+        } catch (Exeption $ex) {
+            die('Errors: ' . $ex->getMessage());
+        }
+    }
+
 }

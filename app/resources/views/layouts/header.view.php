@@ -33,7 +33,7 @@
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
                                     <li class="uk-nav-header">Mon compte</li>
                                     <li><a href="/profile/<?= $_SESSION['user']['id']; ?>">Voir le profile</a></li>
-                                    <li><a href="#">Paramètres</a></li>
+                                    <li><a href="/profile/<?= $_SESSION['user']['id']; ?>/settings">Paramètres</a></li>
                                     <li class="uk-nav-divider"></li>
                                     <form method="post" action="/logout">
                                         <li><button type="submit">Se déconnecter</button></li>

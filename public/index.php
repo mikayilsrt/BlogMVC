@@ -10,6 +10,7 @@ use App\Controllers\LoginController;
 use App\Controllers\ProfileController;
 use App\Controllers\ArticlesController;
 use App\Controllers\RegisterController;
+use App\Controllers\SettingsController;
 
 require "../vendor/autoload.php";
 
@@ -43,6 +44,16 @@ $app->get('/articles/{id}', function ($request, $response, $args) {
 $app->get('/profile/{id}', function ($request, $response, $args) {
     $ProfileController = new ProfileController();
     $ProfileController->index($request, $response, $args);
+});
+
+$app->get('/profile/{id}/settings', function ($request, $response, $args) {
+    $SettingsController = new SettingsController();
+    $SettingsController->index($args);
+});
+
+$app->post('/profile/{id}/settings', function ($request, $response, $args) {
+    $SettingsController = new SettingsController();
+    $SettingsController->update($request, $response, $args);
 });
 
 $app->get('/login', function ($request, $response, $args) {
