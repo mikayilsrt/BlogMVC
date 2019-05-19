@@ -59,4 +59,15 @@ class Article {
         }
     }
 
+    public function getCommentByPostId ($id) {
+        global $db;
+
+        try {
+            return $db->getPDO()->query("SELECT comments.content, comments.created_at, users.name FROM comments JOIN users ON comments.id_user = users.id WHERE comments.id_post = " . $id)
+                ->fetchAll();
+        } catch (Exeption $ex) {
+            die('Errors: ' . $ex->getMessage());
+        }
+    }
+
 }

@@ -19,6 +19,7 @@ class ArticlesController extends Controller {
 
         $posts = new Article();
         $article = $posts->find_by_id($arg['id']);
+        $comments = $posts->getCommentByPostId($arg['id']);
 
         if ($article === null) {
             header('Location: /');

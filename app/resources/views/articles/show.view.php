@@ -17,34 +17,21 @@
     <div style="margin-top: 25px;">
         <h3>Les commentaires : </h3>
 
-        <article class="uk-comment" style="margin-top: 15px; margin-bottom: 20px;">
-            <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
-                <div class="uk-width-expand">
-                    <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">Author</a></h4>
-                    <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                        <li><a href="#">12 days ago</a></li>
-                        <li><a href="#">Reply</a></li>
-                    </ul>
+        <?php if ($comments): foreach ($comments as $comment): ?>
+            <article class="uk-comment" style="margin-top: 15px; margin-bottom: 20px;">
+                <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
+                    <div class="uk-width-expand">
+                        <h4 class="uk-comment-title uk-margin-remove"><?= $comment['name']; ?></h4>
+                        <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
+                            <li><?= $comment['created_at']; ?></li>
+                        </ul>
+                    </div>
+                </header>
+                <div class="uk-comment-body">
+                    <p><?= $comment['content']; ?></p>
                 </div>
-            </header>
-            <div class="uk-comment-body">
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-            </div>
-        </article>
-        <article class="uk-comment" style="margin-top: 15px; margin-bottom: 20px;">
-            <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
-                <div class="uk-width-expand">
-                    <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">Author</a></h4>
-                    <ul class="uk-comment-meta uk-subnav uk-subnav-divider uk-margin-remove-top">
-                        <li><a href="#">12 days ago</a></li>
-                        <li><a href="#">Reply</a></li>
-                    </ul>
-                </div>
-            </header>
-            <div class="uk-comment-body">
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-            </div>
-        </article>
+            </article>
+        <?php endforeach; endif; ?>
     </div>
 
 </div>
