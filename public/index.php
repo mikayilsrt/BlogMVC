@@ -41,6 +41,16 @@ $app->get('/articles/{id}', function ($request, $response, $args) {
     $ArticlesController->show($request, $response, $args);
 });
 
+$app->post('/comments', function ($request, $response, $args) {
+    $ArticlesController = new ArticlesController();
+    $ArticlesController->storeComment($request, $response);
+});
+
+$app->post('/vote', function ($request, $response, $args) {
+    $ArticlesController = new ArticlesController();
+    $ArticlesController->addVote($request, $response);
+});
+
 $app->get('/profile/{id}', function ($request, $response, $args) {
     $ProfileController = new ProfileController();
     $ProfileController->index($request, $response, $args);

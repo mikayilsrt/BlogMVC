@@ -5,7 +5,7 @@
         <div style="margin-top: 35px;" class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light"
             data-src="assets/img/cover-home.jpg"
             data-sizes="(min-width: 650px) 650px, 100vw" uk-img>
-            <h1 style="text-transform: uppercase;">Bienvenu sur le blog du SIO</h1>
+            <h1 style="text-transform: uppercase;">Bienvenue sur le blog du SIO</h1>
         </div>
 
         <h3>Les dernier articles :</h3>

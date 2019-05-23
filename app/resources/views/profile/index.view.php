@@ -13,9 +13,6 @@
     <div class="uk-text-center" uk-grid>
         <div class="uk-width-1-3@m">
             <div class="uk-card uk-card-body profile-card">
-                <div class="profile-avatar">
-                    <img src="https://images.unsplash.com/photo-1557389767-53dbcb02fc98?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" />
-                </div>
                 <h3><?= $user['name']; ?></h3>
                 <p><strong>Inscrit le : </strong><?= $user['created_at']; ?></p>
                 <p><strong>Nombre d'article : </strong><?= count($articles); ?></p>
