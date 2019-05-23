@@ -5,8 +5,39 @@ namespace App\Controllers;
 use Slim\Http\Request;
 use App\Models\Article;
 use Slim\Http\Response;
+use Slim\Flash\Messages;
 
 class ArticlesController extends Controller {
+        
+    /**
+     * Instance of message object.
+     * 
+     * @var Message
+     */
+    private $messages;
+
+    public function __construct () {
+        $this->messages = new Messages();
+    }
+        
+    /**
+     * Add a new form message.
+     * 
+     * @param string $key (errors, success, etc..)
+     * @param string $value
+     */
+    private function addFlashMessage ($key, $value) {
+        $this->messages->addMessageNow($key, $value);
+    }
+
+    /**
+     * Return all form message.
+     * 
+     * @return array
+     */
+    private function getMessages () {
+        return $this->messages->getMessages();
+    }
 
     public function index () {
         $posts = new Article();
@@ -63,6 +94,48 @@ class ArticlesController extends Controller {
 
         \header('Location: ' . $_SERVER["HTTP_REFERER"]);
         die();
+    }
+
+    public function create () {
+
+        if (empty($_SESSION['user'])){
+            \header('Location: /');
+            die();
+        }
+
+        require Controller::view("articles/create.view");
+    }
+
+
+    public function store (Request $request, Response $response, $args) {
+        $formRequest = $request->getParsedBody();
+        $files = $request->getUploadedFiles();
+
+        if (!empty($formRequest['title']) && !empty($formRequest['content']) && !empty($files['image']->getClientFilename()))
+        {
+            $targetPath = "./assets/img/posts/";
+            $newfile = $files['image'];
+            $uploadFileName = $_SESSION['user']['id'] . "-" . date('s') . "-" . $newfile->getClientFilename();
+            \move_uploaded_file($newfile->file, $targetPath . $uploadFileName);
+    
+            $articleModel = new Article();
+            $articleModel->create(array(
+                $formRequest['title'],
+                $formRequest['content'],
+                $uploadFileName,
+                $_SESSION['user']['id']
+            ));
+    
+            
+            $this->addFlashMessage("success", "Article créer avec succès !");
+        } else {
+            $this->addFlashMessage("errors", "Tous les champs doivent être remplis !");
+        }
+
+        $messages = $this->getMessages();
+
+
+        require Controller::view("articles/create.view");
     }
 
 }

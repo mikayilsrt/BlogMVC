@@ -18,6 +18,9 @@
                 <ul class="uk-navbar-nav">
                     <li><a href="/">Home</a></li>
                     <li><a href="/articles">Blog</a></li>
+                    <?php if(!empty($_SESSION['user']['id'])): ?>
+                        <li><a href="/new-article">Ajouter un article</a></li>
+                    <?php endif; ?>
                 </ul>
             </div>
             <div class="uk-navbar-right">

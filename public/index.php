@@ -31,6 +31,16 @@ $app->get('/', function ($request, $response, $args) {
     $IndexController->index();
 });
 
+$app->get('/new-article', function ($request, $response, $args) {
+    $ArticlesController = new ArticlesController();
+    $ArticlesController->create();
+});
+
+$app->post('/new-article', function ($request, $response, $args) {
+    $ArticlesController = new ArticlesController();
+    $ArticlesController->store($request, $response, $args);
+});
+
 $app->get('/articles', function ($request, $response, $args) {
     $ArticlesController = new ArticlesController();
     $ArticlesController->index();

@@ -15,7 +15,7 @@
                 <div>
                     <div class="uk-card uk-card-default">
                         <div class="uk-card-media-top">
-                            <img src="https://images.unsplash.com/photo-1553531889-6785c6bd1f43?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1900&q=80" alt="">
+                            <img src="./assets/img/posts/<?= $article['thumbnail']; ?>" alt="" style="width: 100%;max-height:250px;overflow:hidden;">
                         </div>
                         <div class="uk-card-body">
                             <h3 class="uk-card-title"><a href="/articles/<?= $article['id']; ?>">Media Top</a></h3>

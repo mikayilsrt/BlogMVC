@@ -4,6 +4,18 @@ namespace App\Models;
 
 class Article {
 
+    public function create ($statement = array()) {
+        global $db;
+
+        try {
+            $db->getPDO()
+                ->prepare("INSERT INTO articles(title, content, thumbnail, user_id) VALUES(?, ?, ?, ?)")
+                ->execute($statement);
+        } catch (Exception $ex) {
+            die('Errors: ' . $ex->getMessage());
+        }
+    }
+
     public function allArticles () {
         global $db;
         $posts = array();
