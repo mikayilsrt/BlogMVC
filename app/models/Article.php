@@ -9,7 +9,7 @@ class Article {
 
         try {
             $db->getPDO()
-                ->prepare("INSERT INTO articles(title, content, thumbnail, user_id) VALUES(?, ?, ?, ?)")
+                ->prepare("INSERT INTO blog_articles(title, content, thumbnail, user_id) VALUES(?, ?, ?, ?)")
                 ->execute($statement);
         } catch (Exception $ex) {
             die('Errors: ' . $ex->getMessage());
@@ -21,7 +21,7 @@ class Article {
         $posts = array();
 
         try {
-            $datas = $db->getPDO()->query("SELECT articles.*, users.name FROM articles JOIN users ON articles.user_id = users.id")
+            $datas = $db->getPDO()->query("SELECT blog_articles.*, blog_users.name FROM blog_articles JOIN blog_users ON blog_articles.user_id = blog_users.id")
                 ->fetchAll();
     
             if ($datas) {
@@ -38,7 +38,7 @@ class Article {
         global $db;
         
         try {
-            return $db->getPDO()->query("SELECT articles.*, users.name FROM articles JOIN users ON articles.user_id = users.id LIMIT 0, " . $size)
+            return $db->getPDO()->query("SELECT blog_articles.*, blog_users.name FROM blog_articles JOIN blog_users ON blog_articles.user_id = blog_users.id LIMIT 0, " . $size)
                 ->fetchAll();
         } catch (Exception $ex) {
             die('Errors: ' . $ex->getMessage());
@@ -49,7 +49,7 @@ class Article {
         global $db;
 
         try {
-            $datas = $db->getPDO()->query("SELECT articles.*, users.name, users.id as userID FROM articles JOIN users ON articles.user_id = users.id WHERE articles.id = " . $id)
+            $datas = $db->getPDO()->query("SELECT blog_articles.*, blog_users.name, blog_users.id as userID FROM blog_articles JOIN blog_users ON blog_articles.user_id = blog_users.id WHERE blog_articles.id = " . $id)
                 ->fetchAll();
     
             if ($datas) {
@@ -64,7 +64,7 @@ class Article {
         global $db;
 
         try {
-            return $db->getPDO()->query("SELECT articles.* FROM articles WHERE user_id = " . $user_id)
+            return $db->getPDO()->query("SELECT blog_articles.* FROM blog_articles WHERE user_id = " . $user_id)
                 ->fetchAll();
         } catch (Exeption $ex) {
             die('Errors: ' . $ex->getMessage());
@@ -75,7 +75,7 @@ class Article {
         global $db;
 
         try {
-            return $db->getPDO()->query("SELECT count(id) FROM votes WHERE id_post = " . $post_id)
+            return $db->getPDO()->query("SELECT count(id) FROM blog_votes WHERE id_post = " . $post_id)
                 ->fetch();
         } catch (Exeption $ex) {
             die('Errors: ' . $ex->getMessage());
@@ -86,7 +86,7 @@ class Article {
         global $db;
 
         try {
-            return $db->getPDO()->query("SELECT comments.content, comments.created_at, users.name FROM comments JOIN users ON comments.id_user = users.id WHERE comments.id_post = '" . $id . "' ORDER BY comments.created_at DESC")
+            return $db->getPDO()->query("SELECT blog_comments.content, blog_comments.created_at, blog_users.name FROM blog_comments JOIN blog_users ON blog_comments.id_user = blog_users.id WHERE blog_comments.id_post = '" . $id . "' ORDER BY blog_comments.created_at DESC")
                 ->fetchAll();
         } catch (Exeption $ex) {
             die('Errors: ' . $ex->getMessage());
@@ -99,7 +99,7 @@ class Article {
         
         try {
             $db->getPDO()
-                ->prepare("INSERT INTO comments(content, id_user, id_post) VALUES(?, ?, ?)")
+                ->prepare("INSERT INTO blog_comments(content, id_user, id_post) VALUES(?, ?, ?)")
                 ->execute($statement);
 
             $result = true;
@@ -119,12 +119,12 @@ class Article {
             $resultIfVote = $db->getPDO()
                 // $statement[0] = id de l'article.
                 // $statement[1] = id de l'utilisateur.
-                ->query("SELECT id_post, id_user FROM votes WHERE id_post = '" . $statement[0] . "' and id_user = " . $statement[1])
+                ->query("SELECT id_post, id_user FROM blog_votes WHERE id_post = '" . $statement[0] . "' and id_user = " . $statement[1])
                 ->fetch();
 
             if ($resultIfVote == false) {
                 $db->getPDO()
-                ->prepare("INSERT INTO votes(id_post, id_user) VALUES(?, ?)")
+                ->prepare("INSERT INTO blog_votes(id_post, id_user) VALUES(?, ?)")
                 ->execute($statement);
 
                 $result = true;

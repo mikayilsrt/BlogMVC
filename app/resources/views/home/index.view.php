@@ -18,7 +18,7 @@
                             <img src="./assets/img/posts/<?= $article['thumbnail']; ?>" alt="" style="width: 100%;max-height:250px;overflow:hidden;">
                         </div>
                         <div class="uk-card-body">
-                            <h3 class="uk-card-title"><a href="/articles/<?= $article['id']; ?>">Media Top</a></h3>
+                            <h3 class="uk-card-title"><a href="/articles/<?= $article['id']; ?>"><?= $article['title']; ?></a></h3>
                             <p style="max-height: 120px;overflow: hidden;"><?= $article['content']; ?></p>
                         </div>
                     </div>

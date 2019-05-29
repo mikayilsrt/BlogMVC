@@ -21,12 +21,12 @@ class User {
         $result = false;
         try {
             // search if a user exist.
-            $req = $db->getPDO()->query("SELECT email FROM users WHERE email = '" . $statement[1] . "'");
+            $req = $db->getPDO()->query("SELECT email FROM blog_users WHERE email = '" . $statement[1] . "'");
 
             // if user is not exist.
             if ($req->fetch() == false) {
                 $db->getPDO()
-                    ->prepare("INSERT INTO users (name, email, password, created_at, updated_at) VALUES (?, ?, ?, NOW(), NOW())")
+                    ->prepare("INSERT INTO blog_users (name, email, password, created_at, updated_at) VALUES (?, ?, ?, NOW(), NOW())")
                     ->execute($statement);
                 $result = true;
             }
@@ -43,7 +43,7 @@ class User {
 
         try {
             $req = $db->getPDO()
-                ->query("SELECT * FROM users WHERE email = '" . $email . "' && password = '" . $password . "'");
+                ->query("SELECT * FROM blog_users WHERE email = '" . $email . "' && password = '" . $password . "'");
             $data = $req->fetchAll(PDO::FETCH_OBJ);
             
             if ($data) {
@@ -62,7 +62,7 @@ class User {
         global $db;
         try {
             return $db->getPDO()
-                ->query("SELECT * FROM users WHERE id = " . $user_id)
+                ->query("SELECT * FROM blog_users WHERE id = " . $user_id)
                 ->fetch();
         } catch (Exeption $ex) {
             die('Errors: ' . $ex->getMessage());
@@ -75,7 +75,7 @@ class User {
 
         try {
             return $db->getPDO()
-                ->query("UPDATE users SET users.name = '" . $name . "' WHERE users.id = " . $user_id);
+                ->query("UPDATE blog_users SET blog_users.name = '" . $name . "' WHERE blog_users.id = " . $user_id);
         } catch (Exeption $ex) {
             die('Errors: ' . $ex->getMessage());
         }
@@ -87,7 +87,7 @@ class User {
 
         try {
             return $db->getPDO()
-                ->query("UPDATE users SET users.email = '" . $email . "' WHERE users.id = " . $user_id);
+                ->query("UPDATE blog_users SET blog_users.email = '" . $email . "' WHERE blog_users.id = " . $user_id);
         } catch (Exeption $ex) {
             die('Errors: ' . $ex->getMessage());
         }
@@ -99,7 +99,7 @@ class User {
 
         try {
             return $db->getPDO()
-                ->query("UPDATE users SET users.password = '" . $password . "' WHERE users.id = " . $user_id);
+                ->query("UPDATE blog_users SET blog_users.password = '" . $password . "' WHERE blog_users.id = " . $user_id);
         } catch (Exeption $ex) {
             die('Errors: ' . $ex->getMessage());
         }

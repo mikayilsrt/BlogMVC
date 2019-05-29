@@ -103,7 +103,7 @@ class LoginController extends Controller {
         $_SESSION['user'] = array(
             "id"    =>  $userInformation[0]->id,
             "name"  =>  $userInformation[0]->name,
-            "email" =>  $$userInformation[0]->email,
+            "email" =>  $userInformation[0]->email,
             "created_at"    =>  $userInformation[0]->created_at,
             "updated_at"    =>  $userInformation[0]->updated_at
         );
